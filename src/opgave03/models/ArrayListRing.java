@@ -12,13 +12,7 @@ public class ArrayListRing<E> implements Ring<E>{
 
     @Override
     public void advance() {
-        if (arrayList.isEmpty()){
-            return;
-        }
-        if (indexOfCurrentItem == arrayList.size()){
-            indexOfCurrentItem = 0;
-        }
-        else indexOfCurrentItem++;
+        indexOfCurrentItem = (indexOfCurrentItem + 1) % arrayList.size();
     }
 
     @Override
