@@ -30,6 +30,7 @@ public class ArrayListRing<E> implements Ring<E>{
     @Override
     public void add(E item) {
         arrayList.add(item);
+        indexOfCurrentItem = arrayList.indexOf(item);
     }
 
     @Override
