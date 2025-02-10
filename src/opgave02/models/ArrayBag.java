@@ -1,5 +1,7 @@
 package opgave02.models;
 
+import java.util.List;
+
 public class ArrayBag<E> implements Bag<E> {
     // the array to hold the items
     private final E[] items;
@@ -37,42 +39,83 @@ public class ArrayBag<E> implements Bag<E> {
 
     @Override
     public boolean add(E newEntry) {
-        // TODO
+        if(!isFull()){
+            for (int i = 0; i < items.length; i++) {
+                if (items[i] == null) {
+                    items[i] = newEntry;
+                    size++;
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
     @Override
     public E remove() {
-        // TODO
+        if (!isEmpty()){
+            for (int i = 0; i < items.length; i++) {
+                if (items[i] != null){
+                    E removed = items[i];
+                    items[i] = null;
+                    size--;
+                    return removed;
+                }
+            }
+        }
         return null;
     }
 
     @Override
     public boolean remove(E anEntry) {
-        // TODO
+        if (contains(anEntry)){
+            for (int i = 0; i < items.length; i++) {
+                if (items[i].equals(anEntry)){
+                    items[i] = null;
+                    size--;
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
     @Override
     public void clear() {
-        // TODO
+        if (!isEmpty()){
+            for (E item : items) {
+                item = null;
+            }
+            size = 0;
+        }
     }
 
     @Override
     public int getFrequencyOf(E anEntry) {
-        // TODO
-        return 0;
+        int count = 0;
+        for (E item : items) {
+          if (item != null && item.equals(anEntry)) {
+              count++;
+          }
+        }
+        return count;
     }
 
     @Override
     public boolean contains(E anEntry) {
-        // TODO
+        for (E item : items) {
+           if(item != null && item.equals(anEntry)){
+               return true;
+           }
+        }
         return false;
     }
 
     @Override
     public E[] toArray() {
-        // TODO
+        if (!isEmpty()){
+            return items.clone();
+        }
         return null;
     }
 }
