@@ -1,6 +1,7 @@
 package opgave03.models;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class ArrayListRing<E> implements Ring<E>{
     private ArrayList<E> arrayList;
@@ -16,8 +17,10 @@ public class ArrayListRing<E> implements Ring<E>{
     }
 
     @Override
-    public E getCurrentItem() {
-        if (arrayList.isEmpty()) return null;
+    public E getCurrentItem() throws Exception {
+        if (arrayList.isEmpty()){
+            throw new Exception("The ring is empty.");
+        }
         return arrayList.get(indexOfCurrentItem);
     }
 

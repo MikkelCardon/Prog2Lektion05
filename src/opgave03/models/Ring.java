@@ -17,7 +17,7 @@ public interface Ring<E> {
      * Return the current item.
      * Throws EmptyRingException, if the ring is empty.
      */
-    E getCurrentItem();
+    E getCurrentItem() throws Exception;
 
     /**
      * Add the item after the current item,
