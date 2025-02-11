@@ -38,16 +38,15 @@ public class ArrayListRing<E> implements Ring<E>{
 
     @Override
     public boolean removeItem(E item) {
-        //ToDo: Hvis element bliver fjernet vil alle index blive rykke med en. Derfor skal sidste if sætning
-        //Ændres så så den hvis index er mindre end indexOfCurrentItem
-        //Hvis den er ligmed så kan vi advange()
-        //Kig også igennem Ring interface til at forstå krav
         int index = arrayList.indexOf(item);
         if(index == -1){
             return false;
         }
         arrayList.remove(index);
-        if (index == indexOfCurrentItem){
+        if (index < indexOfCurrentItem){
+            indexOfCurrentItem--;
+        }
+        else if (index == indexOfCurrentItem){
             advance();
         }
         return true;
@@ -55,8 +54,14 @@ public class ArrayListRing<E> implements Ring<E>{
 
     @Override
     public E removeCurrentItem() {
-        E removed = arrayList.get(indexOfCurrentItem);
-        arrayList.remove(indexOfCurrentItem-1);
+        if (arrayList.isEmpty()){
+            System.out.println("The ring is empty");
+            return null;
+        }
+        E removed = arrayList.remove(indexOfCurrentItem);
+        if(!arrayList.isEmpty()){
+            advance();
+        }
         return removed;
     }
 
