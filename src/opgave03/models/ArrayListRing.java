@@ -41,6 +41,7 @@ public class ArrayListRing<E> implements Ring<E>{
         //ToDo: Hvis element bliver fjernet vil alle index blive rykke med en. Derfor skal sidste if sætning
         //Ændres så så den hvis index er mindre end indexOfCurrentItem
         //Hvis den er ligmed så kan vi advange()
+        //Kig også igennem Ring interface til at forstå krav
         int index = arrayList.indexOf(item);
         if(index == -1){
             return false;
